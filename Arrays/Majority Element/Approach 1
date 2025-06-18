@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        int count=1;
+        vector<int>res;
+        int ini=nums[0];
+        for(int i=1;i<n;i++)
+        {
+            if(nums[i]==ini)
+            {
+                count++;
+            }
+            else
+            {
+                 if(count>(n/3))
+                    res.push_back(ini);
+                 count=1;
+                 ini=nums[i];
+            }
+        }
+        if(count>n/3)
+           res.push_back(ini);
+        return res;
+    }
+};
