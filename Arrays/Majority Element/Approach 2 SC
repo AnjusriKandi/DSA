@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>ans;
+        int maj1=-1,maj2=-1;
+        int cnt1=0,cnt2=0;
+        for(int i:nums){
+
+            if(i==maj1)//Increase the cnt so to make sure that this is the majority number that was found till now
+                cnt1++;
+            else if(i==maj2)
+                cnt2++;
+            else if(cnt1==0){ //Assign the first candidate as the majority
+                maj1=i;
+                cnt1++;
+            }
+            else if(cnt2==0){ //Assign the first candidate as the majority
+                maj2=i;
+                cnt2++;
+            }
+            
+            else{  //Decrement the cnt if any other element occurs
+                cnt1--;
+                cnt2--;
+            }
+        }
+
+        //To double check that the elements we found are the majority numbers traverse through the array
+        cnt1=0;
+        cnt2=0;
+        for(int i:nums){
+            if(i==maj1)
+                cnt1++;
+            else if(i==maj2)
+                cnt2++;
+        }
+
+        if(cnt1>n/3)
+            ans.push_back(maj1);
+        if(cnt2>n/3)
+            ans.push_back(maj2);
+        
+        return ans;
+    }
+};
